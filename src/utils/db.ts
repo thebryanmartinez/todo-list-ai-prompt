@@ -1,19 +1,31 @@
-// db.ts
 import { Dexie, type EntityTable } from 'dexie'
 
-interface Example {
+export type Priority = 'High' | 'Medium' | 'Low'
+
+export interface Task {
   id: number
   name: string
-  age: number
+  finished: boolean
+  priority: Priority
 }
 
-const db = new Dexie('ExampleDatabase') as Dexie & {
-  friends: EntityTable<Example, 'id'>
+export interface Subtask {
+  id: number
+  taskId: number
+  name: string
+  finished: boolean
 }
 
+// Database definition
+const db = new Dexie('TaskDatabase') as Dexie & {
+  tasks: EntityTable<Task, 'id'>
+  subtasks: EntityTable<Subtask, 'id'>
+}
+
+// Database schema
 db.version(1).stores({
-  friends: '++id, name, age'
+  tasks: '++id, name, finished, priority',
+  subtasks: '++id, taskId, name, finished'
 })
 
-export type { Example }
 export { db }
