@@ -5,7 +5,7 @@ export default function Home() {
         <div className='flex min-h-screen p-8 gap-8 bg-slate-200'>
             <section className='flex flex-col flex-1 gap-8'>
                 <div className='max-h-32 flex-1 rounded-xl'>
-                    <TaskCounter tasks={5} completedTasks={4} />
+                    <TaskCounter tasks={6} completedTasks={5} />
                 </div>
                 <div className='flex-1 bg-amber-200 rounded-xl'>
                     <TaskHeader text='To Do' numberIndicator={3} />
