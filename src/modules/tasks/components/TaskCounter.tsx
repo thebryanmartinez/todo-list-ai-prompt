@@ -25,7 +25,7 @@ export const TaskCounter = ({ tasks, completedTasks }: TaskCounterProps) => {
                     <span className='text-xs'>TASKS</span>
                 </ItemTitle>
                 <ItemDescription className='font-cursive text-3xl text-black'>
-                    You're Productive
+                    You&apos;re Productive
                 </ItemDescription>
             </ItemContent>
             <ItemActions>

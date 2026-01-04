@@ -1,4 +1,4 @@
-import { TaskCounter, TaskHeader } from '@/modules/tasks/components';
+import { TaskCounter, TaskHeader, TaskList } from '@/modules/tasks/components';
 
 export default function Home() {
     return (
@@ -9,6 +9,49 @@ export default function Home() {
                 </div>
                 <div className='flex-1 rounded-xl'>
                     <TaskHeader text='To Do' numberIndicator={3} />
+                    <TaskList
+                        tasks={[
+                            {
+                                id: 1,
+                                name: 'Focus Session',
+                                finished: true,
+                                description:
+                                    'Chapter: Theromodynamcs reviews & practice problems regarding heat transfer, this is a much bigger text and is really big, but like realllllly biiiiig',
+                                priority: 'High',
+                                subtasks: [
+                                    { id: 1, taskId: 1, name: 'Review loop laws', finished: false },
+                                    {
+                                        id: 2,
+                                        taskId: 1,
+                                        name: 'Practice problem 3.1',
+                                        finished: true,
+                                    },
+                                    {
+                                        id: 3,
+                                        taskId: 1,
+                                        name: 'Read chapter summary',
+                                        finished: false,
+                                    },
+                                ],
+                            },
+                            {
+                                id: 2,
+                                name: 'Buy groceries',
+                                finished: false,
+                                description:
+                                    'Need to buy milk, eggs, bread, and some vegetables for the week.',
+                                priority: 'Medium',
+                                subtasks: [
+                                    {
+                                        id: 4,
+                                        taskId: 2,
+                                        name: 'Go to the supermarket',
+                                        finished: false,
+                                    },
+                                ],
+                            },
+                        ]}
+                    />
                 </div>
             </section>
             <section className='flex flex-1'>

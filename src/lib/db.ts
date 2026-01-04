@@ -6,6 +6,7 @@ export interface Task {
     id: number;
     name: string;
     finished: boolean;
+    description: string;
     priority: Priority;
 }
 
@@ -24,7 +25,7 @@ const db = new Dexie('TaskDatabase') as Dexie & {
 
 // Database schema
 db.version(1).stores({
-    tasks: '++id, name, finished, priority',
+    tasks: '++id, name, finished, description, priority',
     subtasks: '++id, taskId, name, finished',
 });
 
