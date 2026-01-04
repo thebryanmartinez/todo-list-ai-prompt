@@ -7,7 +7,7 @@ export default function Home() {
                 <div className='max-h-32 flex-1 rounded-xl'>
                     <TaskCounter tasks={6} completedTasks={5} />
                 </div>
-                <div className='flex-1 bg-amber-200 rounded-xl'>
+                <div className='flex-1 rounded-xl'>
                     <TaskHeader text='To Do' numberIndicator={3} />
                 </div>
             </section>
