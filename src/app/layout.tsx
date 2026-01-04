@@ -15,6 +15,7 @@ const titleFont = Noto_Serif({
 
 const cursiveFont = Sacramento({
     variable: '--font-cursive',
+    subsets: ['latin'],
     weight: '400',
 });
 

@@ -7,7 +7,7 @@ export default function Home() {
                 <div className='max-h-32 flex-1 rounded-xl'>
                     <TaskCounter tasks={6} completedTasks={5} />
                 </div>
-                <div className='flex-1 rounded-xl'>
+                <div className='flex-1 space-y-2'>
                     <TaskHeader text='To Do' numberIndicator={3} />
                     <TaskList
                         tasks={[
@@ -16,7 +16,7 @@ export default function Home() {
                                 name: 'Focus Session',
                                 finished: true,
                                 description:
-                                    'Chapter: Theromodynamcs reviews & practice problems regarding heat transfer, this is a much bigger text and is really big, but like realllllly biiiiig',
+                                    'Chapter: Thermodynamics reviews & practice problems regarding heat transfer, this is a much bigger text and is really big, but like realllllly biiiiig',
                                 priority: 'High',
                                 subtasks: [
                                     { id: 1, taskId: 1, name: 'Review loop laws', finished: false },
