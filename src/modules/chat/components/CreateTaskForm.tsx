@@ -77,14 +77,11 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                 );
             }
 
-            console.log('Task created successfully!');
-
             form.reset();
             onTaskCreated?.();
-            onTaskCreated?.();
         } catch (error) {
+            // TODO: Implement sonner for showing error on toast notifications
             console.error('Error saving task:', error);
-            console.error('Error creating task');
         }
     }
 
