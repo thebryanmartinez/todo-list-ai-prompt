@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { type Subtask, type Task, db } from '@/lib/db';
-import { CreateTaskForm } from '@/modules/chat/components';
+import {CreateTaskForm} from '@/modules/chat/components';
 import {
     DeleteCompletedTasksButton,
     TaskCounter,
@@ -97,7 +97,7 @@ export default function Home() {
             </section>
             <section className='flex flex-1 max-h-full'>
                 <div className='flex-1 bg-white rounded-xl h-full overflow-hidden'>
-                    <CreateTaskForm />
+                    <CreateTaskForm onTaskCreated={loadTasks} />
                 </div>
             </section>
         </div>

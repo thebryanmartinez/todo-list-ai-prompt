@@ -40,7 +40,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-export const CreateTaskForm = () => {
+export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }) => {
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -80,6 +80,8 @@ export const CreateTaskForm = () => {
             console.log('Task created successfully!');
 
             form.reset();
+            onTaskCreated?.();
+            onTaskCreated?.();
         } catch (error) {
             console.error('Error saving task:', error);
             console.error('Error creating task');
@@ -229,4 +231,4 @@ export const CreateTaskForm = () => {
             </Button>
         </div>
     );
-}
+};
