@@ -3,3 +3,4 @@ export * from './TaskHeader';
 export * from './CircularProgress';
 export * from './Task';
 export * from './TaskList';
+export * from './DeleteCompletedTasksButton';
