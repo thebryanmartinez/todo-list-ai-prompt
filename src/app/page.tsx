@@ -1,3 +1,4 @@
+import { CreateTaskForm } from '@/modules/chat/components';
 import { TaskCounter, TaskHeader, TaskList } from '@/modules/tasks/components';
 
 export default function Home() {
@@ -54,8 +55,10 @@ export default function Home() {
                     />
                 </div>
             </section>
-            <section className='flex flex-1'>
-                <div className='flex-1 bg-blue-200 rounded-xl'></div>
+            <section className='flex flex-1 max-h-full'>
+                <div className='flex-1 bg-white rounded-xl h-full overflow-hidden'>
+                    <CreateTaskForm />
+                </div>
             </section>
         </div>
     );
