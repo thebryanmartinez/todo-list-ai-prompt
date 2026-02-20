@@ -1,5 +1,6 @@
 import { Dexie, type EntityTable } from 'dexie';
-import { Task, Subtask } from '@/modules/tasks/entities';
+
+import { Subtask, Task } from '@/modules/tasks/entities';
 
 const db = new Dexie('TaskDatabase') as Dexie & {
     tasks: EntityTable<Task, 'id'>;

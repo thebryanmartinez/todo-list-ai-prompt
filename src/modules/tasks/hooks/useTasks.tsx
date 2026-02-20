@@ -1,6 +1,7 @@
-import { useEffect, useState, useCallback } from "react";
-import { db } from "@/lib/db";
-import { Task, Subtask } from "@/modules/tasks/entities";
+import { useCallback, useEffect, useState } from 'react';
+
+import { db } from '@/lib/db';
+import { Subtask, Task } from '@/modules/tasks/entities';
 
 interface TaskWithSubtasks extends Task {
     subtasks: Subtask[];
@@ -53,7 +54,7 @@ export const useTasks = () => {
     const incompleteTasks = totalTasks - completedTasks;
     const todoTasks = tasks.filter((task) => !task.finished);
     const doneTasks = tasks.filter((task) => task.finished);
-    
+
     return {
         tasks,
         totalTasks,
@@ -66,5 +67,5 @@ export const useTasks = () => {
         handleToggleSubtaskComplete,
         handlePlayClick,
         handleDeleteAllCompleted,
-    }
-}
+    };
+};

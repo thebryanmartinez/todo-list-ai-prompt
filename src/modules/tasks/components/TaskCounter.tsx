@@ -6,6 +6,7 @@ import {
     ItemTitle,
 } from '@/modules/shared/components';
 import { CircularProgress } from '@/modules/tasks/components/CircularProgress';
+
 import tasksLocalization from '../localization/en.json';
 
 interface TaskCounterProps {
@@ -23,7 +24,9 @@ export const TaskCounter = ({ tasks, completedTasks }: TaskCounterProps) => {
                     <span className='text-2xl font-bold'>
                         {completedTasks}/{tasks}
                     </span>
-                    <span className='text-xs'>{tasksLocalization.tasks.taskCounter.tasksLabel}</span>
+                    <span className='text-xs'>
+                        {tasksLocalization.tasks.taskCounter.tasksLabel}
+                    </span>
                 </ItemTitle>
                 <ItemDescription className='font-cursive text-3xl text-black'>
                     {tasksLocalization.tasks.taskCounter.productiveMessage}

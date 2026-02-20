@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import { BadgeCheck, Flag, ListTodo, Play } from 'lucide-react';
 
-import { type Priority, type Subtask, type Task as TaskType } from '@/modules/tasks/entities';
 import { Badge } from '@/modules/shared/components/badge';
 import { Button } from '@/modules/shared/components/button';
 import { Checkbox } from '@/modules/shared/components/checkbox';
@@ -16,6 +15,8 @@ import {
     ItemSeparator,
     ItemTitle,
 } from '@/modules/shared/components/item';
+import { type Priority, type Subtask, type Task as TaskType } from '@/modules/tasks/entities';
+
 import tasksLocalization from '../localization/en.json';
 
 interface TaskProps {
@@ -89,7 +90,10 @@ export function Task({
                         <button
                             onClick={() => handleCheckboxChange(false)}
                             className='text-green-500 hover:text-green-600 transition-colors'
-                            aria-label={tasksLocalization.tasks.task.ariaLabels.markIncomplete.replace('{taskName}', task.name)}
+                            aria-label={tasksLocalization.tasks.task.ariaLabels.markIncomplete.replace(
+                                '{taskName}',
+                                task.name
+                            )}
                         >
                             <BadgeCheck className='h-6 w-6 fill-green-500 text-white' />
                         </button>
@@ -98,7 +102,10 @@ export function Task({
                             checked={task.finished}
                             onCheckedChange={handleCheckboxChange}
                             className='h-5 w-5 rounded-full'
-                            aria-label={tasksLocalization.tasks.task.ariaLabels.markComplete.replace('{taskName}', task.name)}
+                            aria-label={tasksLocalization.tasks.task.ariaLabels.markComplete.replace(
+                                '{taskName}',
+                                task.name
+                            )}
                         />
                     )}
                 </div>
@@ -171,7 +178,13 @@ export function Task({
                     <div className='flex items-center gap-2'>
                         <Badge variant='secondary' className='font-bold'>
                             <Flag className={`size-4 ${priorityColors[task.priority]}`} />
-                            <span className={priorityColors[task.priority]}>{tasksLocalization.tasks.priorities[task.priority as keyof typeof tasksLocalization.tasks.priorities]}</span>
+                            <span className={priorityColors[task.priority]}>
+                                {
+                                    tasksLocalization.tasks.priorities[
+                                        task.priority as keyof typeof tasksLocalization.tasks.priorities
+                                    ]
+                                }
+                            </span>
                         </Badge>
                         <div className='flex items-center gap-1 text-sm text-muted-foreground'>
                             <ListTodo className='size-4' />
@@ -182,17 +195,19 @@ export function Task({
             </ItemContent>
 
             {/* Right Section - Play Button */}
-            <ItemMedia className='self-start pt-0.5'>
-                <Button
-                    variant='outline'
-                    size='icon'
-                    className='rounded-full bg-blue-200 outline-blue-500'
-                    onClick={handlePlayClick}
-                    aria-label={tasksLocalization.tasks.task.ariaLabels.startPomodoro}
-                >
-                    <Play className='size-4 fill-blue-500 outline-blue-500' strokeWidth={0} />
-                </Button>
-            </ItemMedia>
+            {task.finished === false && (
+                <ItemMedia className='self-start pt-0.5'>
+                    <Button
+                        variant='outline'
+                        size='icon'
+                        className='rounded-full bg-blue-200 outline-blue-500'
+                        onClick={handlePlayClick}
+                        aria-label={tasksLocalization.tasks.task.ariaLabels.startPomodoro}
+                    >
+                        <Play className='size-4 fill-blue-500 outline-blue-500' strokeWidth={0} />
+                    </Button>
+                </ItemMedia>
+            )}
         </Item>
     );
 }

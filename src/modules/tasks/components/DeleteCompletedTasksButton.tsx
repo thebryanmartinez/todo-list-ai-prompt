@@ -1,6 +1,7 @@
 import { Trash2 } from 'lucide-react';
 
 import { Button } from '@/modules/shared/components/button';
+
 import tasksLocalization from '../localization/en.json';
 
 interface DeleteCompletedTasksButtonProps {

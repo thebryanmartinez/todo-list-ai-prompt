@@ -1,10 +1,9 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useFieldArray, useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-
-import { useFieldArray, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { db } from "@/lib/db";
-import chatLocalization from '../localization/en.json';
+import { db } from '@/lib/db';
+import chatLocalization from '@/modules/chat/localization/en.json';
 
 const formSchema = z.object({
     name: z.string().min(1, chatLocalization.chat.validation.taskNameRequired),
@@ -22,7 +21,6 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export const useTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }) => {
-
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -66,7 +64,6 @@ export const useTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }) =
             console.error('Error saving task:', error);
         }
     }
-
 
     return {
         form,

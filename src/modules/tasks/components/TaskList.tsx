@@ -2,10 +2,16 @@
 
 import * as React from 'react';
 
-import { type Subtask, type Task as TaskType } from '@/modules/tasks/entities';
+import {
+    Empty,
+    EmptyDescription,
+    EmptyHeader,
+    EmptyTitle,
+} from '@/modules/shared/components/empty';
 import { ItemGroup, ItemSeparator } from '@/modules/shared/components/item';
 import { Task } from '@/modules/tasks/components/Task';
-import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from '@/modules/shared/components/empty';
+import { type Subtask, type Task as TaskType } from '@/modules/tasks/entities';
+
 import tasksLocalization from '../localization/en.json';
 
 interface TaskWithSubtasks extends TaskType {
@@ -37,23 +43,24 @@ export function TaskList({
 
     return (
         <ItemGroup className='gap-4'>
-            {
-                tasks.length > 0 ? tasks.map((task, index) => (
-                <div key={task.id} className='contents'>
-                    <Task
-                        task={task}
-                        subtasks={task.subtasks || []}
-                        subtaskCount={task.subtasks?.length || 0}
-                        isExpanded={expandedTaskId === task.id}
-                        onToggleExpand={() => handleToggleExpand(task.id)}
-                        onToggleComplete={onToggleTaskComplete}
-                        onSubtaskToggle={onToggleSubtaskComplete}
-                        onPlayClick={onPlayClick}
-                    />
-                    {index < tasks.length - 1 && <ItemSeparator className='hidden' />}
-                </div>
-            )) : (
-                <Empty className="border border-dashed border-background">
+            {tasks.length > 0 ? (
+                tasks.map((task, index) => (
+                    <div key={task.id} className='contents'>
+                        <Task
+                            task={task}
+                            subtasks={task.subtasks || []}
+                            subtaskCount={task.subtasks?.length || 0}
+                            isExpanded={expandedTaskId === task.id}
+                            onToggleExpand={() => handleToggleExpand(task.id)}
+                            onToggleComplete={onToggleTaskComplete}
+                            onSubtaskToggle={onToggleSubtaskComplete}
+                            onPlayClick={onPlayClick}
+                        />
+                        {index < tasks.length - 1 && <ItemSeparator className='hidden' />}
+                    </div>
+                ))
+            ) : (
+                <Empty className='border border-dashed border-background'>
                     <EmptyHeader>
                         <EmptyTitle>{emptyStateContent.title}</EmptyTitle>
                         <EmptyDescription>{emptyStateContent.description}</EmptyDescription>

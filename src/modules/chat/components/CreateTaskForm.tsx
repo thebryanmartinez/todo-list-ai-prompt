@@ -3,6 +3,8 @@
 import { PlusIcon, XIcon } from 'lucide-react';
 import { Controller } from 'react-hook-form';
 
+import { useTaskForm } from '@/modules/chat/hooks';
+import chatLocalization from '@/modules/chat/localization/en.json';
 import {
     Button,
     Field,
@@ -11,19 +13,16 @@ import {
     FieldError,
     FieldGroup,
     FieldLabel,
+    Input,
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-    Input,
-    Textarea
+    Textarea,
 } from '@/modules/shared/components';
-import { useTaskForm } from '@/modules/chat/hooks';
-import chatLocalization from '@/modules/chat/localization/en.json';
 
 export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }) => {
-
     const { form, fields, append, remove, onSubmit } = useTaskForm({ onTaskCreated });
 
     return (
@@ -39,16 +38,24 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>
-                                <FieldLabel htmlFor='task-name'>{chatLocalization.chat.createTaskForm.fields.name.label}</FieldLabel>
+                                <FieldLabel htmlFor='task-name'>
+                                    {chatLocalization.chat.createTaskForm.fields.name.label}
+                                </FieldLabel>
                                 <FieldContent>
                                     <Input
                                         {...field}
                                         id='task-name'
-                                        placeholder={chatLocalization.chat.createTaskForm.fields.name.placeholder}
+                                        placeholder={
+                                            chatLocalization.chat.createTaskForm.fields.name
+                                                .placeholder
+                                        }
                                         aria-invalid={fieldState.invalid}
                                     />
                                     <FieldDescription>
-                                        {chatLocalization.chat.createTaskForm.fields.name.description}
+                                        {
+                                            chatLocalization.chat.createTaskForm.fields.name
+                                                .description
+                                        }
                                     </FieldDescription>
                                     {fieldState.invalid && (
                                         <FieldError errors={[fieldState.error]} />
@@ -63,17 +70,25 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>
-                                <FieldLabel htmlFor='task-description'>{chatLocalization.chat.createTaskForm.fields.description.label}</FieldLabel>
+                                <FieldLabel htmlFor='task-description'>
+                                    {chatLocalization.chat.createTaskForm.fields.description.label}
+                                </FieldLabel>
                                 <FieldContent>
                                     <Textarea
                                         {...field}
                                         id='task-description'
-                                        placeholder={chatLocalization.chat.createTaskForm.fields.description.placeholder}
+                                        placeholder={
+                                            chatLocalization.chat.createTaskForm.fields.description
+                                                .placeholder
+                                        }
                                         className='min-h-[100px]'
                                         aria-invalid={fieldState.invalid}
                                     />
                                     <FieldDescription>
-                                        {chatLocalization.chat.createTaskForm.fields.description.description}
+                                        {
+                                            chatLocalization.chat.createTaskForm.fields.description
+                                                .description
+                                        }
                                     </FieldDescription>
                                     {fieldState.invalid && (
                                         <FieldError errors={[fieldState.error]} />
@@ -88,23 +103,39 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>
-                                <FieldLabel htmlFor='task-priority'>{chatLocalization.chat.createTaskForm.fields.priority.label}</FieldLabel>
+                                <FieldLabel htmlFor='task-priority'>
+                                    {chatLocalization.chat.createTaskForm.fields.priority.label}
+                                </FieldLabel>
                                 <FieldContent>
                                     <Select onValueChange={field.onChange} value={field.value}>
                                         <SelectTrigger
                                             id='task-priority'
                                             aria-invalid={fieldState.invalid}
                                         >
-                                            <SelectValue placeholder={chatLocalization.chat.createTaskForm.fields.priority.placeholder} />
+                                            <SelectValue
+                                                placeholder={
+                                                    chatLocalization.chat.createTaskForm.fields
+                                                        .priority.placeholder
+                                                }
+                                            />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value='High'>{chatLocalization.chat.priorities.high}</SelectItem>
-                                            <SelectItem value='Medium'>{chatLocalization.chat.priorities.medium}</SelectItem>
-                                            <SelectItem value='Low'>{chatLocalization.chat.priorities.low}</SelectItem>
+                                            <SelectItem value='High'>
+                                                {chatLocalization.chat.priorities.high}
+                                            </SelectItem>
+                                            <SelectItem value='Medium'>
+                                                {chatLocalization.chat.priorities.medium}
+                                            </SelectItem>
+                                            <SelectItem value='Low'>
+                                                {chatLocalization.chat.priorities.low}
+                                            </SelectItem>
                                         </SelectContent>
                                     </Select>
                                     <FieldDescription>
-                                        {chatLocalization.chat.createTaskForm.fields.priority.description}
+                                        {
+                                            chatLocalization.chat.createTaskForm.fields.priority
+                                                .description
+                                        }
                                     </FieldDescription>
                                     {fieldState.invalid && (
                                         <FieldError errors={[fieldState.error]} />
@@ -115,7 +146,9 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                     />
 
                     <Field>
-                        <FieldLabel>{chatLocalization.chat.createTaskForm.fields.subtasks.label}</FieldLabel>
+                        <FieldLabel>
+                            {chatLocalization.chat.createTaskForm.fields.subtasks.label}
+                        </FieldLabel>
                         <FieldContent>
                             <FieldDescription>
                                 {chatLocalization.chat.createTaskForm.fields.subtasks.description}
@@ -130,7 +163,10 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                                             <div className='flex items-center gap-2'>
                                                 <Input
                                                     {...controllerField}
-                                                    placeholder={chatLocalization.chat.createTaskForm.fields.subtasks.placeholder.replace('{index}', String(index + 1))}
+                                                    placeholder={chatLocalization.chat.createTaskForm.fields.subtasks.placeholder.replace(
+                                                        '{index}',
+                                                        String(index + 1)
+                                                    )}
                                                     aria-invalid={fieldState.invalid}
                                                     className='flex-1'
                                                 />
@@ -139,7 +175,10 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                                                     variant='ghost'
                                                     size='sm'
                                                     onClick={() => remove(index)}
-                                                    aria-label={chatLocalization.chat.createTaskForm.fields.subtasks.removeAriaLabel.replace('{index}', String(index + 1))}
+                                                    aria-label={chatLocalization.chat.createTaskForm.fields.subtasks.removeAriaLabel.replace(
+                                                        '{index}',
+                                                        String(index + 1)
+                                                    )}
                                                 >
                                                     <XIcon className='size-4' />
                                                 </Button>

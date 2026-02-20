@@ -1,6 +1,6 @@
 'use client';
 
-import {CreateTaskForm} from '@/modules/chat/components';
+import { CreateTaskForm } from '@/modules/chat/components';
 import {
     DeleteCompletedTasksButton,
     TaskCounter,
@@ -11,7 +11,18 @@ import { useTasks } from '@/modules/tasks/hooks';
 import tasksLocalization from '@/modules/tasks/localization/en.json';
 
 export default function Home() {
-    const { totalTasks, todoTasks, handleToggleTaskComplete, handleToggleSubtaskComplete, handlePlayClick, handleDeleteAllCompleted, completedTasks, doneTasks, incompleteTasks, loadTasks } = useTasks()
+    const {
+        totalTasks,
+        todoTasks,
+        handleToggleTaskComplete,
+        handleToggleSubtaskComplete,
+        handlePlayClick,
+        handleDeleteAllCompleted,
+        completedTasks,
+        doneTasks,
+        incompleteTasks,
+        loadTasks,
+    } = useTasks();
     return (
         <div className='flex min-h-screen p-8 gap-8 bg-slate-200'>
             <section className='flex flex-col flex-1 gap-8'>
@@ -20,7 +31,10 @@ export default function Home() {
                 </div>
                 <div className='flex-1 space-y-4'>
                     <div className='space-y-2'>
-                        <TaskHeader text={tasksLocalization.tasks.headers.todo} numberIndicator={incompleteTasks} />
+                        <TaskHeader
+                            text={tasksLocalization.tasks.headers.todo}
+                            numberIndicator={incompleteTasks}
+                        />
                         <TaskList
                             tasks={todoTasks}
                             onToggleTaskComplete={handleToggleTaskComplete}
@@ -31,10 +45,15 @@ export default function Home() {
                     </div>
                     <div className='space-y-2'>
                         <div className='flex justify-between items-center'>
-                            <TaskHeader text={tasksLocalization.tasks.headers.completed} numberIndicator={completedTasks} />
-                            { doneTasks.length > 0 && <DeleteCompletedTasksButton
-                                onDeleteCompleted={handleDeleteAllCompleted}
-                            />}
+                            <TaskHeader
+                                text={tasksLocalization.tasks.headers.completed}
+                                numberIndicator={completedTasks}
+                            />
+                            {doneTasks.length > 0 && (
+                                <DeleteCompletedTasksButton
+                                    onDeleteCompleted={handleDeleteAllCompleted}
+                                />
+                            )}
                         </div>
                         <TaskList
                             tasks={doneTasks}
