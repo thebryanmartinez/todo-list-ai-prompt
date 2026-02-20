@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { db } from '@/lib/db';
-import { Subtask, Task } from '@/modules/tasks/entities';
+import type { Subtask, Task } from '@/modules/tasks/entities';
 
 interface TaskWithSubtasks extends Task {
     subtasks: Subtask[];

@@ -1,6 +1,6 @@
 import { Trash2 } from 'lucide-react';
 
-import { Button } from '@/modules/shared/components/button';
+import { Button } from '@/modules/shared/components';
 
 import tasksLocalization from '../localization/en.json';
 

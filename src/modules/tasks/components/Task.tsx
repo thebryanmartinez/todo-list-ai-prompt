@@ -1,12 +1,13 @@
 'use client';
-import * as React from 'react';
+
+import { useState } from 'react';
 
 import { BadgeCheck, Flag, ListTodo, Play } from 'lucide-react';
 
-import { Badge } from '@/modules/shared/components/badge';
-import { Button } from '@/modules/shared/components/button';
-import { Checkbox } from '@/modules/shared/components/checkbox';
 import {
+    Badge,
+    Button,
+    Checkbox,
     Item,
     ItemContent,
     ItemDescription,
@@ -14,8 +15,8 @@ import {
     ItemMedia,
     ItemSeparator,
     ItemTitle,
-} from '@/modules/shared/components/item';
-import { type Priority, type Subtask, type Task as TaskType } from '@/modules/tasks/entities';
+} from '@/modules/shared/components';
+import type { Priority, Subtask, Task as TaskType } from '@/modules/tasks/entities';
 
 import tasksLocalization from '../localization/en.json';
 
@@ -46,7 +47,7 @@ export function Task({
     onSubtaskToggle,
     onPlayClick,
 }: TaskProps) {
-    const [internalIsExpanded, setInternalIsExpanded] = React.useState(false);
+    const [internalIsExpanded, setInternalIsExpanded] = useState(false);
 
     const isExpanded = controlledIsExpanded ?? internalIsExpanded;
 
@@ -88,6 +89,7 @@ export function Task({
                 <div onClick={(e) => e.stopPropagation()}>
                     {task.finished ? (
                         <button
+                            type='button'
                             onClick={() => handleCheckboxChange(false)}
                             className='text-green-500 hover:text-green-600 transition-colors'
                             aria-label={tasksLocalization.tasks.task.ariaLabels.markIncomplete.replace(

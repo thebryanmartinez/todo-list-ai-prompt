@@ -7,10 +7,11 @@ import {
     EmptyDescription,
     EmptyHeader,
     EmptyTitle,
-} from '@/modules/shared/components/empty';
-import { ItemGroup, ItemSeparator } from '@/modules/shared/components/item';
+    ItemGroup,
+    ItemSeparator,
+} from '@/modules/shared/components';
 import { Task } from '@/modules/tasks/components/Task';
-import { type Subtask, type Task as TaskType } from '@/modules/tasks/entities';
+import type { Subtask, Task as TaskType } from '@/modules/tasks/entities';
 
 import tasksLocalization from '../localization/en.json';
 
