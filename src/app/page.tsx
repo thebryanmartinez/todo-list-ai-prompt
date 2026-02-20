@@ -77,20 +77,24 @@ export default function Home() {
                             onToggleTaskComplete={handleToggleTaskComplete}
                             onToggleSubtaskComplete={handleToggleSubtaskComplete}
                             onPlayClick={handlePlayClick}
+                            emptyStateTitle='No tasks yet'
+                            emptyStateDescription='Add a task to get started'
                         />
                     </div>
                     <div className='space-y-2'>
                         <div className='flex justify-between items-center'>
                             <TaskHeader text='Completed' numberIndicator={completedTasks} />
-                            <DeleteCompletedTasksButton
+                            { doneTasks.length > 0 && <DeleteCompletedTasksButton
                                 onDeleteCompleted={handleDeleteAllCompleted}
-                            />
+                            />}
                         </div>
                         <TaskList
                             tasks={doneTasks}
                             onToggleTaskComplete={handleToggleTaskComplete}
                             onToggleSubtaskComplete={handleToggleSubtaskComplete}
                             onPlayClick={handlePlayClick}
+                            emptyStateTitle='No completed tasks'
+                            emptyStateDescription='Complete some tasks to see them here'
                         />
                     </div>
                 </div>
