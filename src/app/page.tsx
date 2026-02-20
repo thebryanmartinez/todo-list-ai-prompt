@@ -1,6 +1,6 @@
 'use client';
 
-import { CreateTaskForm } from '@/modules/chat/components';
+import { CreateTaskContainer, CreateTaskForm } from '@/modules/chat/components';
 import {
     DeleteCompletedTasksButton,
     TaskCounter,
@@ -67,7 +67,7 @@ export default function Home() {
             </section>
             <section className='flex flex-1 max-h-full'>
                 <div className='flex-1 bg-white rounded-xl h-full overflow-hidden'>
-                    <CreateTaskForm onTaskCreated={loadTasks} />
+                    <CreateTaskContainer onTaskCreated={loadTasks} />
                 </div>
             </section>
         </div>

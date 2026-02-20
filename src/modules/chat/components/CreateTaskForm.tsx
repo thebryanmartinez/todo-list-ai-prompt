@@ -22,7 +22,11 @@ import {
     Textarea,
 } from '@/modules/shared/components';
 
-export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }) => {
+export interface CreateTaskFormProps {
+    onTaskCreated?: () => void;
+}
+
+export const CreateTaskForm = ({ onTaskCreated }: CreateTaskFormProps) => {
     const { form, fields, append, remove, onSubmit } = useTaskForm({ onTaskCreated });
 
     return (
