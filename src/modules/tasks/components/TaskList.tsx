@@ -2,10 +2,11 @@
 
 import * as React from 'react';
 
-import { type Subtask, type Task as TaskType } from '@/lib/db';
+import { type Subtask, type Task as TaskType } from '@/modules/tasks/entities';
 import { ItemGroup, ItemSeparator } from '@/modules/shared/components/item';
 import { Task } from '@/modules/tasks/components/Task';
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from '@/modules/shared/components/empty';
+import tasksLocalization from '../localization/en.json';
 
 interface TaskWithSubtasks extends TaskType {
     subtasks?: Subtask[];
@@ -16,8 +17,7 @@ interface TaskListPropsEnhanced {
     onToggleTaskComplete?: (taskId: number, completed: boolean) => void;
     onToggleSubtaskComplete?: (subtaskId: number, completed: boolean) => void;
     onPlayClick?: (taskId: number) => void;
-    emptyStateTitle: string;
-    emptyStateDescription: string;
+    emptyStateType?: 'noTasks' | 'noCompletedTasks';
 }
 
 export function TaskList({
@@ -25,9 +25,10 @@ export function TaskList({
     onToggleTaskComplete,
     onToggleSubtaskComplete,
     onPlayClick,
-    emptyStateTitle,
-    emptyStateDescription,
+    emptyStateType = 'noTasks',
 }: TaskListPropsEnhanced) {
+    const emptyStateContent = tasksLocalization.tasks.taskList.empty[emptyStateType];
+
     const [expandedTaskId, setExpandedTaskId] = React.useState<number | null>(null);
 
     const handleToggleExpand = (taskId: number) => {
@@ -54,8 +55,8 @@ export function TaskList({
             )) : (
                 <Empty className="border border-dashed border-background">
                     <EmptyHeader>
-                        <EmptyTitle>{emptyStateTitle}</EmptyTitle>
-                        <EmptyDescription>{emptyStateDescription}</EmptyDescription>
+                        <EmptyTitle>{emptyStateContent.title}</EmptyTitle>
+                        <EmptyDescription>{emptyStateContent.description}</EmptyDescription>
                     </EmptyHeader>
                 </Empty>
             )}

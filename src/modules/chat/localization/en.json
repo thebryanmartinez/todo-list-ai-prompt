@@ -1,0 +1,40 @@
+{
+  "chat": {
+    "createTaskForm": {
+      "fields": {
+        "name": {
+          "label": "Task Name",
+          "placeholder": "Enter task name",
+          "description": "This is the name of your task."
+        },
+        "description": {
+          "label": "Description", 
+          "placeholder": "Enter task description (optional)",
+          "description": "Provide additional details about the task."
+        },
+        "priority": {
+          "label": "Priority",
+          "placeholder": "Select priority",
+          "description": "Choose the priority level for this task."
+        },
+        "subtasks": {
+          "label": "Subtasks",
+          "description": "Add subtasks to break down your task (optional).",
+          "placeholder": "Subtask {index}",
+          "addButton": "Add Subtask",
+          "removeAriaLabel": "Remove subtask {index}"
+        }
+      },
+      "submitButton": "Create Task"
+    },
+    "validation": {
+      "taskNameRequired": "Task name is required.",
+      "subtaskNameEmpty": "Subtask name cannot be empty."
+    },
+    "priorities": {
+      "high": "High",
+      "medium": "Medium", 
+      "low": "Low"
+    }
+  }
+}

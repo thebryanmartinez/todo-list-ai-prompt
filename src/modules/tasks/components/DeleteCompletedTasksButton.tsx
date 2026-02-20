@@ -1,6 +1,7 @@
 import { Trash2 } from 'lucide-react';
 
 import { Button } from '@/modules/shared/components/button';
+import tasksLocalization from '../localization/en.json';
 
 interface DeleteCompletedTasksButtonProps {
     onDeleteCompleted: () => void;
@@ -15,7 +16,7 @@ export const DeleteCompletedTasksButton = ({
             variant='ghost'
             size='icon'
             className='text-neutral-500 hover:text-neutral-600'
-            aria-label='Delete all completed tasks'
+            aria-label={tasksLocalization.tasks.deleteCompletedButton.ariaLabel}
         >
             <Trash2 className='h-4 w-4' />
         </Button>

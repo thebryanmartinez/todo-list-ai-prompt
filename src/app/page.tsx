@@ -8,6 +8,7 @@ import {
     TaskList,
 } from '@/modules/tasks/components';
 import { useTasks } from '@/modules/tasks/hooks';
+import tasksLocalization from '@/modules/tasks/localization/en.json';
 
 export default function Home() {
     const { totalTasks, todoTasks, handleToggleTaskComplete, handleToggleSubtaskComplete, handlePlayClick, handleDeleteAllCompleted, completedTasks, doneTasks, incompleteTasks, loadTasks } = useTasks()
@@ -19,19 +20,18 @@ export default function Home() {
                 </div>
                 <div className='flex-1 space-y-4'>
                     <div className='space-y-2'>
-                        <TaskHeader text='To Do' numberIndicator={incompleteTasks} />
+                        <TaskHeader text={tasksLocalization.tasks.headers.todo} numberIndicator={incompleteTasks} />
                         <TaskList
                             tasks={todoTasks}
                             onToggleTaskComplete={handleToggleTaskComplete}
                             onToggleSubtaskComplete={handleToggleSubtaskComplete}
                             onPlayClick={handlePlayClick}
-                            emptyStateTitle='No tasks yet'
-                            emptyStateDescription='Add a task to get started'
+                            emptyStateType='noTasks'
                         />
                     </div>
                     <div className='space-y-2'>
                         <div className='flex justify-between items-center'>
-                            <TaskHeader text='Completed' numberIndicator={completedTasks} />
+                            <TaskHeader text={tasksLocalization.tasks.headers.completed} numberIndicator={completedTasks} />
                             { doneTasks.length > 0 && <DeleteCompletedTasksButton
                                 onDeleteCompleted={handleDeleteAllCompleted}
                             />}
@@ -41,8 +41,7 @@ export default function Home() {
                             onToggleTaskComplete={handleToggleTaskComplete}
                             onToggleSubtaskComplete={handleToggleSubtaskComplete}
                             onPlayClick={handlePlayClick}
-                            emptyStateTitle='No completed tasks'
-                            emptyStateDescription='Complete some tasks to see them here'
+                            emptyStateType='noCompletedTasks'
                         />
                     </div>
                 </div>
