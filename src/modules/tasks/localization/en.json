@@ -1,0 +1,39 @@
+{
+    "tasks": {
+        "headers": {
+            "todo": "To Do",
+            "completed": "Completed"
+        },
+        "task": {
+            "ariaLabels": {
+                "markComplete": "Mark \"{taskName}\" as complete",
+                "markIncomplete": "Mark \"{taskName}\" as incomplete",
+                "startPomodoro": "Start pomodoro timer"
+            }
+        },
+        "taskList": {
+            "empty": {
+                "noTasks": {
+                    "title": "No tasks yet",
+                    "description": "Add a task to get started"
+                },
+                "noCompletedTasks": {
+                    "title": "No completed tasks",
+                    "description": "Complete some tasks to see them here"
+                }
+            }
+        },
+        "taskCounter": {
+            "tasksLabel": "TASKS",
+            "productiveMessage": "You're Productive"
+        },
+        "deleteCompletedButton": {
+            "ariaLabel": "Delete all completed tasks"
+        },
+        "priorities": {
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low"
+        }
+    }
+}

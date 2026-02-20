@@ -1,89 +1,33 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { PlusIcon, XIcon } from 'lucide-react';
-import { Controller, useFieldArray, useForm } from 'react-hook-form';
-import * as z from 'zod';
+import { Controller } from 'react-hook-form';
 
-import { db } from '@/lib/db';
-import { Button } from '@/modules/shared/components/button';
+import { useTaskForm } from '@/modules/chat/hooks';
+import chatLocalization from '@/modules/chat/localization/en.json';
 import {
+    Button,
     Field,
     FieldContent,
     FieldDescription,
     FieldError,
     FieldGroup,
     FieldLabel,
-} from '@/modules/shared/components/field';
-import { Input } from '@/modules/shared/components/input';
-import {
+    Input,
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@/modules/shared/components/select';
-import { Textarea } from '@/modules/shared/components/textarea';
+    Textarea,
+} from '@/modules/shared/components';
 
-const formSchema = z.object({
-    name: z.string().min(1, 'Task name is required.'),
-    description: z.string().optional(),
-    priority: z.enum(['High', 'Medium', 'Low']),
-    subtasks: z
-        .array(
-            z.object({
-                name: z.string().min(1, 'Subtask name cannot be empty.'),
-            })
-        )
-        .optional(),
-});
+export interface CreateTaskFormProps {
+    onTaskCreated?: () => void;
+}
 
-type FormData = z.infer<typeof formSchema>;
-
-export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }) => {
-    const form = useForm<FormData>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: '',
-            description: '',
-            priority: 'Medium',
-            subtasks: [],
-        },
-    });
-
-    const { fields, append, remove } = useFieldArray({
-        control: form.control,
-        name: 'subtasks',
-    });
-
-    async function onSubmit(data: FormData) {
-        try {
-            const taskId = await db.tasks.add({
-                name: data.name,
-                description: data.description || '',
-                priority: data.priority,
-                finished: false,
-            });
-
-            if (data.subtasks && data.subtasks.length > 0) {
-                await Promise.all(
-                    data.subtasks.map((subtask) =>
-                        db.subtasks.add({
-                            taskId,
-                            name: subtask.name,
-                            finished: false,
-                        })
-                    )
-                );
-            }
-
-            form.reset();
-            onTaskCreated?.();
-        } catch (error) {
-            // TODO: Implement sonner for showing error on toast notifications
-            console.error('Error saving task:', error);
-        }
-    }
+export const CreateTaskForm = ({ onTaskCreated }: CreateTaskFormProps) => {
+    const { form, fields, append, remove, onSubmit } = useTaskForm({ onTaskCreated });
 
     return (
         <div className='p-6 h-full flex flex-col'>
@@ -98,16 +42,24 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>
-                                <FieldLabel htmlFor='task-name'>Task Name</FieldLabel>
+                                <FieldLabel htmlFor='task-name'>
+                                    {chatLocalization.chat.createTaskForm.fields.name.label}
+                                </FieldLabel>
                                 <FieldContent>
                                     <Input
                                         {...field}
                                         id='task-name'
-                                        placeholder='Enter task name'
+                                        placeholder={
+                                            chatLocalization.chat.createTaskForm.fields.name
+                                                .placeholder
+                                        }
                                         aria-invalid={fieldState.invalid}
                                     />
                                     <FieldDescription>
-                                        This is the name of your task.
+                                        {
+                                            chatLocalization.chat.createTaskForm.fields.name
+                                                .description
+                                        }
                                     </FieldDescription>
                                     {fieldState.invalid && (
                                         <FieldError errors={[fieldState.error]} />
@@ -122,17 +74,25 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>
-                                <FieldLabel htmlFor='task-description'>Description</FieldLabel>
+                                <FieldLabel htmlFor='task-description'>
+                                    {chatLocalization.chat.createTaskForm.fields.description.label}
+                                </FieldLabel>
                                 <FieldContent>
                                     <Textarea
                                         {...field}
                                         id='task-description'
-                                        placeholder='Enter task description (optional)'
+                                        placeholder={
+                                            chatLocalization.chat.createTaskForm.fields.description
+                                                .placeholder
+                                        }
                                         className='min-h-[100px]'
                                         aria-invalid={fieldState.invalid}
                                     />
                                     <FieldDescription>
-                                        Provide additional details about the task.
+                                        {
+                                            chatLocalization.chat.createTaskForm.fields.description
+                                                .description
+                                        }
                                     </FieldDescription>
                                     {fieldState.invalid && (
                                         <FieldError errors={[fieldState.error]} />
@@ -147,23 +107,39 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>
-                                <FieldLabel htmlFor='task-priority'>Priority</FieldLabel>
+                                <FieldLabel htmlFor='task-priority'>
+                                    {chatLocalization.chat.createTaskForm.fields.priority.label}
+                                </FieldLabel>
                                 <FieldContent>
                                     <Select onValueChange={field.onChange} value={field.value}>
                                         <SelectTrigger
                                             id='task-priority'
                                             aria-invalid={fieldState.invalid}
                                         >
-                                            <SelectValue placeholder='Select priority' />
+                                            <SelectValue
+                                                placeholder={
+                                                    chatLocalization.chat.createTaskForm.fields
+                                                        .priority.placeholder
+                                                }
+                                            />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value='High'>High</SelectItem>
-                                            <SelectItem value='Medium'>Medium</SelectItem>
-                                            <SelectItem value='Low'>Low</SelectItem>
+                                            <SelectItem value='High'>
+                                                {chatLocalization.chat.priorities.high}
+                                            </SelectItem>
+                                            <SelectItem value='Medium'>
+                                                {chatLocalization.chat.priorities.medium}
+                                            </SelectItem>
+                                            <SelectItem value='Low'>
+                                                {chatLocalization.chat.priorities.low}
+                                            </SelectItem>
                                         </SelectContent>
                                     </Select>
                                     <FieldDescription>
-                                        Choose the priority level for this task.
+                                        {
+                                            chatLocalization.chat.createTaskForm.fields.priority
+                                                .description
+                                        }
                                     </FieldDescription>
                                     {fieldState.invalid && (
                                         <FieldError errors={[fieldState.error]} />
@@ -174,10 +150,12 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                     />
 
                     <Field>
-                        <FieldLabel>Subtasks</FieldLabel>
+                        <FieldLabel>
+                            {chatLocalization.chat.createTaskForm.fields.subtasks.label}
+                        </FieldLabel>
                         <FieldContent>
                             <FieldDescription>
-                                Add subtasks to break down your task (optional).
+                                {chatLocalization.chat.createTaskForm.fields.subtasks.description}
                             </FieldDescription>
                             <div className='space-y-2 max-h-32 overflow-y-auto'>
                                 {fields.map((field, index) => (
@@ -189,7 +167,10 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                                             <div className='flex items-center gap-2'>
                                                 <Input
                                                     {...controllerField}
-                                                    placeholder={`Subtask ${index + 1}`}
+                                                    placeholder={chatLocalization.chat.createTaskForm.fields.subtasks.placeholder.replace(
+                                                        '{index}',
+                                                        String(index + 1)
+                                                    )}
                                                     aria-invalid={fieldState.invalid}
                                                     className='flex-1'
                                                 />
@@ -198,7 +179,10 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                                                     variant='ghost'
                                                     size='sm'
                                                     onClick={() => remove(index)}
-                                                    aria-label={`Remove subtask ${index + 1}`}
+                                                    aria-label={chatLocalization.chat.createTaskForm.fields.subtasks.removeAriaLabel.replace(
+                                                        '{index}',
+                                                        String(index + 1)
+                                                    )}
                                                 >
                                                     <XIcon className='size-4' />
                                                 </Button>
@@ -216,7 +200,7 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                                     onClick={() => append({ name: '' })}
                                 >
                                     <PlusIcon className='size-4 mr-2' />
-                                    Add Subtask
+                                    {chatLocalization.chat.createTaskForm.fields.subtasks.addButton}
                                 </Button>
                             </div>
                         </FieldContent>
@@ -224,7 +208,7 @@ export const CreateTaskForm = ({ onTaskCreated }: { onTaskCreated?: () => void }
                 </FieldGroup>
             </form>
             <Button type='submit' form='create-task-form' className='w-full sticky bottom-0 mt-4'>
-                Create Task
+                {chatLocalization.chat.createTaskForm.submitButton}
             </Button>
         </div>
     );
