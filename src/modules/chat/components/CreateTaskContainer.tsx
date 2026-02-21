@@ -9,7 +9,7 @@ interface CreateTaskContainerProps {
 export const CreateTaskContainer = ({ onTaskCreated }: CreateTaskContainerProps) => {
     return (
         <section className='flex-1 w-full h-full'>
-            <Tabs>
+            <Tabs defaultValue='chat'>
                 <TabsList className='w-full'>
                     <TabsTrigger value='chat'>Chat</TabsTrigger>
                     <TabsTrigger value='form'>Form</TabsTrigger>
