@@ -9,8 +9,8 @@ interface CreateTaskContainerProps {
 
 export const CreateTaskContainer = ({ onTaskCreated }: CreateTaskContainerProps) => {
     return (
-        <section>
-            <Tabs defaultValue='chat'>
+        <section className='h-full'>
+            <Tabs defaultValue='chat' className='h-full'>
                 <TabsList className='w-full'>
                     <TabsTrigger value='chat'>Chat</TabsTrigger>
                     <TabsTrigger value='form'>Form</TabsTrigger>

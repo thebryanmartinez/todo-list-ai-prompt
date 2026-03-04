@@ -40,9 +40,9 @@ export const CreateTaskChat = () => {
     ]);
 
     return (
-        <div className='flex-1 p-6 flex flex-col justify-between'>
-            <ChatContainerRoot>
-                <ChatContainerContent>
+        <div className='h-full p-6 flex flex-col'>
+            <ChatContainerRoot className='flex-1 min-h-0'>
+                <ChatContainerContent className='space-y-4'>
                     {messages.map((message) => {
                         const isAssistant = message.role === 'assistant';
 
