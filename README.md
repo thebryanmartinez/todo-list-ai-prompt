@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo List AI Prompt
+
+A minimalist todo app with AI-powered task creation. Create tasks through a natural language chat interface or a traditional form — all stored locally in your browser.
+
+## Features
+
+- **Dual task creation** — use a chat interface or structured form, whichever fits your flow
+- **Subtasks** — break tasks down into smaller steps
+- **Priority levels** — mark tasks as High, Medium, or Low priority
+- **Progress tracking** — circular progress indicator and task counter
+- **Bulk cleanup** — delete all completed tasks at once
+- **Local-first** — all data is stored in your browser's IndexedDB, no backend required
+- **Markdown support** — chat messages render markdown with syntax-highlighted code blocks
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| UI Components | Radix UI / shadcn/ui |
+| Storage | Dexie (IndexedDB) |
+| Forms | React Hook Form + Zod |
+| Icons | Lucide React |
 
 ## Getting Started
 
-First, run the development server:
+**Prerequisites:** [Node.js](https://nodejs.org) and [pnpm](https://pnpm.io)
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Install dependencies
+pnpm install
+
+# Start the development server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> [!NOTE]
+> This app runs entirely in the browser. There is no backend or external API — your tasks live in IndexedDB and are private to your device.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Available Scripts
 
-## Learn More
+```bash
+pnpm dev           # Start dev server
+pnpm build         # Build for production
+pnpm start         # Start production server
+pnpm lint          # Run ESLint
+pnpm format        # Format code with Prettier
+pnpm format:check  # Check formatting without writing
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/                  # Next.js App Router (layout, page, global styles)
+├── lib/
+│   ├── db.ts             # Dexie IndexedDB setup (tasks + subtasks tables)
+│   └── utils.ts          # cn() utility (clsx + tailwind-merge)
+└── modules/
+    ├── tasks/            # Task list, task item, progress, hooks, types
+    ├── chat/             # Chat interface, form, input, hooks
+    └── shared/           # Shared UI components (shadcn/ui, prompt-kit)
+```
